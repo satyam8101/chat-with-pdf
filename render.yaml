@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: resume-rag
+    runtime: node
+    buildCommand: npm install && npm --prefix client install && npm --prefix client run build
+    startCommand: node server.js
+    plan: free
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CHROMA_API_KEY
+        sync: false
+      - key: CHROMA_TENANT
+        sync: false
+      - key: CHROMA_DATABASE
+        sync: false
