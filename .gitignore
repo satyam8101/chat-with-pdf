@@ -1,0 +1,6 @@
+node_modules/
+.env
+resumes/*
+!resumes/.gitkeep
+chroma_data/
+*.log
