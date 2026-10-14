@@ -134,6 +134,10 @@ if (fs.existsSync(dist)) {
   app.get(/^(?!\/api).*/, (_req, res) => res.sendFile(path.join(dist, "index.html")));
 }
 
-app.listen(SERVER_PORT, () => {
-  console.log(`API running on http://127.0.0.1:${SERVER_PORT}`);
-});
+export default app;
+
+if (!process.env.VERCEL) {
+  app.listen(SERVER_PORT, () => {
+    console.log(`API running on http://127.0.0.1:${SERVER_PORT}`);
+  });
+}
