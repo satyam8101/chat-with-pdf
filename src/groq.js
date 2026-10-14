@@ -19,7 +19,7 @@ Question: ${question}`;
 
 export function citationList(text, max) {
   const found = new Set();
-  const re = /\[([0-9,\s]+)\]|\(([0-9,\s]+)\)/g;
+  const re = /[\[\(【]([0-9,\s]+)[\]\)】]/g;
   let m;
   while ((m = re.exec(text))) {
     const group = m[1] || m[2];
