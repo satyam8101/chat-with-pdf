@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || "";
-
 export default function App() {
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
@@ -14,7 +12,7 @@ export default function App() {
 
   const loadFiles = useCallback(async () => {
     try {
-      const res = await fetch(`${API_URL}/api/files`);
+      const res = await fetch("/api/files");
       const data = await res.json();
       setFiles(Array.isArray(data) ? data : []);
     } catch {
@@ -38,7 +36,7 @@ export default function App() {
     const form = new FormData();
     form.append("resume", file);
     try {
-      const res = await fetch(`${API_URL}/api/upload`, { method: "POST", body: form });
+      const res = await fetch("/api/upload", { method: "POST", body: form });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Upload failed");
       setNotice(`Indexed ${data.file} (${data.chunks} chunks)`);
@@ -56,7 +54,7 @@ export default function App() {
 
   async function handleDelete(name) {
     try {
-      const res = await fetch(`${API_URL}/api/files/${encodeURIComponent(name)}`, {
+      const res = await fetch(`/api/files/${encodeURIComponent(name)}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error((await res.json()).error || "Delete failed");
@@ -100,7 +98,7 @@ export default function App() {
       });
 
     try {
-      const res = await fetch(`${API_URL}/api/chat/stream`, {
+      const res = await fetch("/api/chat/stream", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: q }),

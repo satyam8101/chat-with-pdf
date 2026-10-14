@@ -75,7 +75,7 @@ export async function listFiles() {
 
 export async function deleteFile(filename) {
   await (await collection()).delete({ where: { file: { $eq: filename } } });
-  return { ok: true };
+  return { ok: true, count: 0 };
 }
 
 export async function health() {

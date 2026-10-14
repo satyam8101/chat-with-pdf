@@ -1,6 +1,0 @@
-{
-  "version": 2,
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://chat-with-pdf-chi-beryl.vercel.app/api/$1" }
-  ]
-}
